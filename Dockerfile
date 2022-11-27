@@ -3,12 +3,13 @@ FROM registry.access.redhat.com/ubi9/ubi-minimal:9.0.0
 
 LABEL maintainer=""
 
+ENV GO_VERSION=1.18.4
+
 # MicroDNF is recommended over YUM for Building Container Images
 # https://www.redhat.com/en/blog/introducing-red-hat-enterprise-linux-atomic-base-image
 
-RUN microdnf install epel-release \
-    && microdnf update -y \
-    && microdnf install -y golang \
+RUN microdnf update -y \
+    && microdnf install -y golang-${GO_VERSION} \
     && microdnf clean all \
     && rm -rf /var/cache/* /var/log/dnf* /var/log/yum.*
 
