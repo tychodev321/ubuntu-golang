@@ -11,7 +11,7 @@ RUN microdnf update -y \
     && microdnf clean all \
     && rm -rf /var/cache/* /var/log/dnf* /var/log/yum.*
 
-RUN go version
+RUN echo "go version: $(go version)"
 
 # USER 1001
 
