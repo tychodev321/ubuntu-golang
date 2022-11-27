@@ -9,9 +9,8 @@ ENV GO_URL=https://go.dev/dl/go${GO_VERSION}.linux-amd64.tar.gz
 # MicroDNF is recommended over YUM for Building Container Images
 # https://www.redhat.com/en/blog/introducing-red-hat-enterprise-linux-atomic-base-image
 
-RUN microdnf --showduplicates list golang | expand
-
 RUN microdnf update -y \
+    && microdnf install -y gzip \
     && microdnf install -y tar \
     && microdnf install -y wget \
     && microdnf clean all \
@@ -28,7 +27,8 @@ ENV PATH=$GOPATH/bin:$GOROOT/bin:$PATH
 
 RUN echo "go version: $(go version)" \
     && echo "wget version: $(wget --version)" \
-    && echo "tar version: $(tar --version)"
+    && echo "tar version: $(tar --version)" \
+    && echo "gzip version: $(gzip --version)"
 
 USER 1001
 
