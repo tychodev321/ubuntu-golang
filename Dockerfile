@@ -27,8 +27,8 @@ ENV PATH=$GOPATH/bin:$GOROOT/bin:$PATH
 
 RUN echo "go version: $(go version)" \
     && echo "wget version: $(wget --version | head -n 1)" \
-    && echo "tar version: $(tar --version)" \
-    && echo "gzip version: $(gzip --version)"
+    && echo "tar version: $(tar --version | head -n 1)" \
+    && echo "gzip version: $(gzip --version | head -n 1)"
 
 USER 1001
 
