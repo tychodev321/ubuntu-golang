@@ -8,6 +8,8 @@ ENV GO_VERSION=1.18.4
 # MicroDNF is recommended over YUM for Building Container Images
 # https://www.redhat.com/en/blog/introducing-red-hat-enterprise-linux-atomic-base-image
 
+RUN microdnf --showduplicates list golang | expand
+
 RUN microdnf update -y \
     && microdnf install -y golang-${GO_VERSION} \
     && microdnf clean all \
