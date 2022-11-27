@@ -11,6 +11,12 @@ RUN microdnf update -y \
     && microdnf clean all \
     && rm -rf /var/cache/* /var/log/dnf* /var/log/yum.*
 
+# Configure Go Home
+RUN mkdir -p $HOME/go \
+    echo 'export GOPATH=$HOME/go' >> $HOME/.bashrc \
+    source $HOME/.bashrc \
+    go env GOPATH
+
 RUN echo "go version: $(go version)"
 
 # USER 1001
