@@ -13,9 +13,9 @@ RUN microdnf update -y \
 
 # Configure Go Home
 RUN mkdir -p $HOME/go \
-    echo 'export GOPATH=$HOME/go' >> $HOME/.bashrc \
-    source $HOME/.bashrc \
-    go env GOPATH
+    && echo 'export GOPATH=$HOME/go' >> $HOME/.bashrc \
+    && source $HOME/.bashrc \
+    && go env GOPATH
 
 RUN echo "go version: $(go version)"
 
