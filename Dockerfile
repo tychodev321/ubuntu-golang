@@ -26,7 +26,7 @@ ENV GOPATH=$HOME/go
 ENV PATH=$GOPATH/bin:$GOROOT/bin:$PATH 
 
 RUN echo "go version: $(go version)" \
-    && echo "wget version: $(wget --version)" \
+    && echo "wget version: $(wget --version | head -n 1)" \
     && echo "tar version: $(tar --version)" \
     && echo "gzip version: $(gzip --version)"
 
