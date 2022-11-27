@@ -7,7 +7,7 @@ LABEL maintainer=""
 # https://www.redhat.com/en/blog/introducing-red-hat-enterprise-linux-atomic-base-image
 
 RUN microdnf update -y \
-    && microdnf install -y golang-1.18.4 \
+    && microdnf install -y golang-1.19.3 \
     && microdnf clean all \
     && rm -rf /var/cache/* /var/log/dnf* /var/log/yum.*
 
