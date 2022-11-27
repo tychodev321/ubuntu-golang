@@ -6,8 +6,9 @@ LABEL maintainer=""
 # MicroDNF is recommended over YUM for Building Container Images
 # https://www.redhat.com/en/blog/introducing-red-hat-enterprise-linux-atomic-base-image
 
-RUN microdnf update -y \
-    && microdnf install -y golang-1.18.4 \
+RUN microdnf install epel-release \
+    && microdnf update -y \
+    && microdnf install -y golang \
     && microdnf clean all \
     && rm -rf /var/cache/* /var/log/dnf* /var/log/yum.*
 
