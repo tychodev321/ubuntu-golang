@@ -1,20 +1,17 @@
-FROM registry.access.redhat.com/ubi9/ubi-minimal:9.0.0
-# FROM redhat/ubi9/ubi-minimal:9.0.0
+FROM ubuntu:22.10
 
 LABEL maintainer=""
 
 ENV GO_VERSION=1.19.3
 ENV GO_URL=https://go.dev/dl/go${GO_VERSION}.linux-amd64.tar.gz
 
-# MicroDNF is recommended over YUM for Building Container Images
-# https://www.redhat.com/en/blog/introducing-red-hat-enterprise-linux-atomic-base-image
-
-RUN microdnf update -y \
-    && microdnf install -y gzip \
-    && microdnf install -y tar \
-    && microdnf install -y wget \
-    && microdnf clean all \
-    && rm -rf /var/cache/* /var/log/dnf* /var/log/yum.*
+RUN apt update -y && apt upgrade -y \
+    && apt install -y gzip \
+    && apt install -y tar \
+    && apt install -y wget \
+    && apt install -y curl \
+    && apt clean -y \
+    && rm -rf /var/lib/apt/lists/*
 
 # Download and install Go
 RUN wget ${GO_URL} \ 
@@ -28,8 +25,7 @@ ENV PATH=$GOPATH/bin:$GOROOT/bin:$PATH
 RUN echo "go version: $(go version)" \
     && echo "wget version: $(wget --version | head -n 1)" \
     && echo "tar version: $(tar --version | head -n 1)" \
-    && echo "gzip version: $(gzip --version | head -n 1)" \
-    && microdnf repolist
+    && echo "gzip version: $(gzip --version | head -n 1)"
 
 # USER 1001
 
