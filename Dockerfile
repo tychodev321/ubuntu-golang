@@ -1,8 +1,9 @@
-FROM ubuntu:22.10
+# https://hub.docker.com/_/ubuntu
+FROM ubuntu:22.04
 
 LABEL maintainer=""
 
-ENV GO_VERSION=1.19.3
+ENV GO_VERSION=1.21.0
 ENV GO_URL=https://go.dev/dl/go${GO_VERSION}.linux-amd64.tar.gz
 
 RUN apt update -y && apt upgrade -y \
